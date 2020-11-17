@@ -1,0 +1,30 @@
+package de.lukaszchalat.rest.webservices.restfulwebservices.controllers;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import de.lukaszchalat.rest.webservices.restfulwebservices.model.HelloWorld;
+
+@RestController
+@CrossOrigin(origins= "http://localhost:4200")
+public class HelloWorldController {
+	
+	@GetMapping(path = "/hello-world")
+	public String helloWorld() {
+		return "Hello World!";
+	}
+	
+	@GetMapping(path = "/hello-world-bean")
+	public HelloWorld helloWorldBean() {
+		//throw new RuntimeException("Something went terrible wrong. Sorry my dear.");
+		return new HelloWorld("Hello World!");
+	}
+	
+	@GetMapping(path = "/hello-world-bean/path-variable/{name}")
+	public HelloWorld helloWorldBean(@PathVariable String name) {
+		return new HelloWorld(String.format("Hello World, %s", name));
+	}
+
+}
